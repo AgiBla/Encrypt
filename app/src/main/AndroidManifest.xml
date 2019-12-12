@@ -18,4 +18,6 @@
         </activity>
     </application>
 
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+
 </manifest>
