@@ -9,11 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.github.rs3vans.krypto.Bytes
-import com.github.rs3vans.krypto.Decrypted
-import com.github.rs3vans.krypto.serializeToBytes
-import com.github.rs3vans.krypto.toBytes
+import com.github.rs3vans.krypto.*
 import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
+import javax.crypto.spec.SecretKeySpec
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,27 +24,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-/*
-        val testFile = FileEntity(
-            0, //0 correspond to 'no value', autogenerate handles it for us
-            "myTestFile",
-            byteArrayOf(1, 0, 1, 1, 0, 1)
-        )
-        val testFile2 = FileEntity(
-            0, //0 correspond to 'no value', autogenerate handles it for us
-            "myTestFile2",
-            byteArrayOf(0, 1, 1, 1, 0, 0)
-        )
+        var test = Decrypted("test".toBytes())
+
+
+        var cipher = BlockCipher(SecretKeySpec("1234567890123456".toByteArray(), "AES"))
+        var enc = cipher.encrypt(test)
+
+        var result = cipher.decrypt(Encrypted(Bytes(enc.bytes.byteArray), Bytes(enc.initVector!!.byteArray)))
+
+
+        Log.i("patata", result.bytes.toDecodedString())
+
+
 
         val db = getDatabase(this)
-        if (testFile.name !in db!!.getFileDao().loadFilenames()) {
-            db.getFileDao().insertFile(testFile)
-        }
-        for (name in db.getFileDao().loadFilenames()) {
-            Log.v(TAG, name)
+
+        for (name in db!!.getFileDao().loadFilenames()) {
+            Log.i("patata", name)
         }
         // db.clearAllTables()
-*/
+
+
+
         if(ContextCompat.checkSelfPermission(this , android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
             val requestedPermissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(this, requestedPermissions, 1)
@@ -82,20 +81,23 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(resultCode == -1 && data != null){
+        // Result code correctly encrypted file
+        if (resultCode == 10){
+            Toast.makeText(applicationContext, "File encrypted successfully", Toast.LENGTH_LONG).show()
+        }
+
+        // File selected
+        else if (resultCode == -1 && data != null){
             FILE_PATH = data.data!!.path!!
 
             val intent = Intent(this, EncryptFile()::class.java)
             intent.putExtra("path", FILE_PATH)
             startActivityForResult(intent, 1)
-        }else{
-            val toast = Toast.makeText(applicationContext, "File not selected", Toast.LENGTH_SHORT)
-            toast.show()
         }
 
-        when{// Delete this Log.i and use it to run encrypt and decrypt function
-            requestCode == 10 -> Log.i("FileEncryption", "Encrypt button")// Run encryption function and save encrypted file in folder : ENCRYPT_FOLDER_PATH
-            requestCode == 20 -> Log.i("FileEncryption", "Decrypt button")// decrypt file in folder ENCRYPT_FOLDER_PATH
+        // No file selected
+        else {
+            Toast.makeText(applicationContext, "File not selected", Toast.LENGTH_SHORT).show()
         }
     }
 }
