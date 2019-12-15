@@ -16,8 +16,6 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
-    // Url used to generate string of 20 characters containing a-z, A-Z and 0-9
-    val url = "https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new"
     val TAG = "MainActivity-LOG"
     lateinit var FILE_PATH : String
     var ENCRYPT_FOLDER_PATH = "????" //to be determined
@@ -56,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 
 
     fun EncryptFile(view: View) {
-        GetRandomString(url)
         OpenFileExplorer(10)
     }
 
@@ -72,6 +69,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun OpenFileExplorer(requestcode: Int){
+
+        val toast = Toast.makeText(applicationContext, "Select file you want to encrypt", Toast.LENGTH_LONG)
+        toast.show()
+
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.setType("*/*")
         startActivityForResult(intent, requestcode)
@@ -82,9 +83,10 @@ class MainActivity : AppCompatActivity() {
 
         if(resultCode == -1 && data != null){
             FILE_PATH = data.data!!.path!!
-            Log.i("FileEncryption", FILE_PATH)
-            val toast = Toast.makeText(applicationContext, data.data!!.path, Toast.LENGTH_SHORT)
-            toast.show()
+
+            val intent = Intent(this, EncryptFile()::class.java)
+            intent.putExtra("path", FILE_PATH)
+            startActivityForResult(intent, 1)
         }else{
             val toast = Toast.makeText(applicationContext, "File not selected", Toast.LENGTH_SHORT)
             toast.show()
