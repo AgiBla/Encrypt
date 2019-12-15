@@ -1,22 +1,28 @@
 package cs.ut.ee.fileencryption
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
-import android.content.Intent
-import android.content.pm.PackageManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import android.widget.Toast
+import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
+import okhttp3.*
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
 
+    // Url used to generate string of 20 characters containing a-z, A-Z and 0-9
+    val url = "https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new"
     val TAG = "MainActivity-LOG"
     lateinit var FILE_PATH : String
     var ENCRYPT_FOLDER_PATH = "????" //to be determined
+
+    private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +54,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun EncryptFile(view: View) {
 
+    fun EncryptFile(view: View) {
+        GetRandomString(url)
         OpenFileExplorer(10)
     }
 
@@ -63,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, 20)
         */
     }
+
     fun OpenFileExplorer(requestcode: Int){
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.setType("*/*")
@@ -86,5 +94,20 @@ class MainActivity : AppCompatActivity() {
             requestCode == 10 -> Log.i("FileEncryption", "Encrypt button")// Run encryption function and save encrypted file in folder : ENCRYPT_FOLDER_PATH
             requestCode == 20 -> Log.i("FileEncryption", "Decrypt button")// decrypt file in folder ENCRYPT_FOLDER_PATH
         }
+    }
+
+    // Reads HTTP request and receives random string from Random.org
+    fun GetRandomString(url: String) {
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {}
+            override fun onResponse(call: Call, response: Response) {
+                //println(response.body()?.string())
+                Log.i("patata", response.body()?.string())
+            }
+        })
     }
 }
