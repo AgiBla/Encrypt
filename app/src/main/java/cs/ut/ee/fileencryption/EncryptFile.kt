@@ -1,11 +1,13 @@
 package cs.ut.ee.fileencryption
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.github.rs3vans.krypto.Bytes
+import com.github.rs3vans.krypto.Decrypted
+import com.github.rs3vans.krypto.Encrypted
+import com.github.rs3vans.krypto.hashPassword
 import kotlinx.android.synthetic.main.encryptfile.*
 import okhttp3.*
 import java.io.IOException

@@ -9,6 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.github.rs3vans.krypto.Bytes
+import com.github.rs3vans.krypto.Decrypted
+import com.github.rs3vans.krypto.serializeToBytes
+import com.github.rs3vans.krypto.toBytes
 import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
 
 
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+/*
         val testFile = FileEntity(
             0, //0 correspond to 'no value', autogenerate handles it for us
             "myTestFile",
@@ -41,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             Log.v(TAG, name)
         }
         // db.clearAllTables()
-
+*/
         if(ContextCompat.checkSelfPermission(this , android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
             val requestedPermissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(this, requestedPermissions, 1)
