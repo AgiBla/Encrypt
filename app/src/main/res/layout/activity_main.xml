@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Select first button to choose a file to encrypt"
+        android:text="Tasio Aguirre, Tobias Nusser, Jon Ander Sukia "
         android:textColor="#363636"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"

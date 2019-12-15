@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
-import okhttp3.*
-import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,8 +17,6 @@ class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity-LOG"
     lateinit var FILE_PATH : String
     var ENCRYPT_FOLDER_PATH = "????" //to be determined
-
-    private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,20 +92,5 @@ class MainActivity : AppCompatActivity() {
             requestCode == 10 -> Log.i("FileEncryption", "Encrypt button")// Run encryption function and save encrypted file in folder : ENCRYPT_FOLDER_PATH
             requestCode == 20 -> Log.i("FileEncryption", "Decrypt button")// decrypt file in folder ENCRYPT_FOLDER_PATH
         }
-    }
-
-    // Reads HTTP request and receives random string from Random.org
-    fun GetRandomString(url: String) {
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-            override fun onResponse(call: Call, response: Response) {
-                //println(response.body()?.string())
-                Log.i("patata", response.body()?.string())
-            }
-        })
     }
 }
