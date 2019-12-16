@@ -6,15 +6,11 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.github.rs3vans.krypto.*
-import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
-import javax.crypto.spec.SecretKeySpec
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,26 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
-
-        var test = Decrypted("test".toBytes())
-
-
-        var cipher = BlockCipher(SecretKeySpec("1234567890123456".toByteArray(), "AES"))
-        var enc = cipher.encrypt(test)
-
-        var result = cipher.decrypt(Encrypted(Bytes(enc.bytes.byteArray), Bytes(enc.initVector!!.byteArray)))
-
-
-        Log.i("patata", result.bytes.toDecodedString())
-
-
-
-        val db = getDatabase(this)
-
-        for (name in db!!.getFileDao().loadFilenames()) {
-            Log.i("patata", name)
-        }
-
 
         if(ContextCompat.checkSelfPermission(this , android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
             val requestedPermissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -61,9 +37,8 @@ class MainActivity : AppCompatActivity() {
 
     fun DecryptFile(view: View) {
 
-        val intent = Intent(this, DecryptFile::class.java)
+        val intent = Intent(this, FileList::class.java)
         startActivity(intent)
-
     }
 
     fun OpenFileExplorer(requestcode: Int){
@@ -85,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // File selected
-        else if (resultCode == -1 && data != null){
+        else if (resultCode == -1 && data != null) {
             val uri = data.data
 
             var name = ""

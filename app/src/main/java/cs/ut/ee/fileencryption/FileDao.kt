@@ -17,6 +17,13 @@ interface FileDao {
     fun loadFileIDs(): Array<Int>
 
     /**
+     * Get all data from a file
+     */
+    @Query("SELECT * FROM file WHERE name LIKE :first")
+    fun findByName(first: String): FileEntity
+
+
+    /**
      * Insert a new file into the db
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)

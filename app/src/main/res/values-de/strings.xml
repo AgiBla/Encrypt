@@ -3,14 +3,19 @@
     <string name="app_name">Dateiverschlüsselung</string>
     <string name="decrypt_file">DECRYPT EINE DATEI</string>
     <string name="encrypt">ENCRYPT</string>
+    <string name="decrypt">DECRYPT</string>
     <string name="encrypt_file">EINE DATEI VERSCHLÜSSELN</string>
     <string name="pin_code">Erstellen Sie einen PIN-Code</string>
+    <string name="pin_code1">   ...</string>
     <string name="selected_file">Sie haben die Datei ausgewählt:</string>
     <string name="characters">Die PIN sollte aus mindestens 4 Zeichen bestehen</string>
+    <string name="pin_incorrect">   ...</string>
     <string name="unable">Diese Datei kann nicht verschlüsselt werden\nVersuchen Sie, es in den Ordner Downloads zu verschieben und versuchen Sie es erneut. </string>
+    <string name="not_found">   ...</string>
 
     <string name="toast_1">Wählen Sie die zu verschlüsselnde Datei aus</string>
     <string name="toast_2">Datei erfolgreich verschlüsselt</string>
     <string name="toast_3">Datei nicht ausgewählt</string>
     <string name="toast_4">Verbindung zu Random.org nicht möglich</string>
+    <string name="toast_5"> ...</string>
 </resources>

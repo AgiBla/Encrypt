@@ -1,7 +1,6 @@
 package cs.ut.ee.fileencryption
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,6 @@ import kotlinx.android.synthetic.main.encryptfile.*
 import okhttp3.*
 import java.io.File
 import java.io.IOException
-import java.lang.Exception
 import javax.crypto.spec.SecretKeySpec
 
 
@@ -109,15 +107,26 @@ class EncryptFile : AppCompatActivity() {
         val encryptedCheck = cipher.encrypt(check)
         val encryptedContent = cipher.encrypt(content)
 
+        try {
+            var f = File(path + ".crypt")
+            f.writeBytes(encryptedContent.bytes.byteArray)
+        } catch (e: java.lang.Exception) {
+            runOnUiThread {
+                textError2.visibility = View.VISIBLE
+                pBar.visibility = View.INVISIBLE
+            }
+            finish()
+        }
+
         // Create object to store in database
         val encrytedFile = FileEntity(
             0, //0 correspond to 'no value', autogenerate handles it for us
             name,
             salt,
             encryptedCheck.bytes.byteArray,
-            encryptedCheck.initVector?.byteArray,
-            encryptedContent.bytes.byteArray,
-            encryptedContent.initVector?.byteArray
+            encryptedCheck.initVector?.byteArray!!,
+            path+".crypt",
+            encryptedContent.initVector?.byteArray!!
         )
 
         // Store object in database

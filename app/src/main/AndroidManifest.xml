@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".EncryptFile"> </activity>
+        <activity android:name=".DecryptFile"> </activity>
+        <activity android:name=".FileList"> </activity>
     </application>
 
 </manifest>

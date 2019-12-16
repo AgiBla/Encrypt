@@ -4,14 +4,19 @@
     <string name="decrypt_file">DECRYPT A FILE</string>
     <string name="selected_file">You have selected the file:</string>
     <string name="pin_code">Create a PIN code</string>
+    <string name="pin_code1">Insert PIN code</string>
     <string name="encrypt">ENCRYPT</string>
+    <string name="decrypt">DECRYPT</string>
     <string name="characters">PIN should be at least 4 characters</string>
+    <string name="pin_incorrect">PIN code is incorrect</string>
     <string name="unable">This file cannot be encrypted\nTry moving it to Downloads folder and try again</string>
+    <string name="not_found">Encrypted file could not be found</string>
 
 
     <string name="toast_1">Select file you want to encrypt</string>
     <string name="toast_2">File encrypted successfully</string>
     <string name="toast_3">File not selected</string>
     <string name="toast_4">Unable to connect to Random.org</string>
+    <string name="toast_5">There already exists a file with that name</string>
 
 </resources>
