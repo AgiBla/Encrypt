@@ -14,7 +14,7 @@ database and preventing unauthorized access to your sensitive files.
 
 ## How it works
 
-![Encryption process concept](hhttps://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/encryption_concept.png)
+![Encryption process concept](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/encryption_concept.png)
 
 TODO INSERT SCREENSHOT WHEN APP IS FINISHED AND PRESENT USE CASE
 
