@@ -7,5 +7,9 @@ import androidx.room.PrimaryKey
 data class FileEntity (
     @PrimaryKey(autoGenerate = true) var id: Int,
     var name : String?,
-    var content : ByteArray?
+    var key : String?,
+    var checkByte : ByteArray?,
+    var checkInit : ByteArray?,
+    var contentByte : ByteArray?,
+    var contentInit : ByteArray?
 )
