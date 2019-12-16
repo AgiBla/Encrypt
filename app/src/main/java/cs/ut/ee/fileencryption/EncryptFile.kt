@@ -3,7 +3,6 @@ package cs.ut.ee.fileencryption
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.BlockCipher
 import com.github.rs3vans.krypto.Bytes
@@ -28,12 +27,7 @@ class EncryptFile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.encryptfile)
 
-        path = intent.getStringExtra("path").split(":")[1]
-
-        if (!path.startsWith("/storage/emulated/0/"))
-            path = "/storage/emulated/0/$path"
-        else
-            path = "/$path"
+        path = intent.getStringExtra("path")
 
         // Write name of the file in TextView
         val fileName = path.split("/")

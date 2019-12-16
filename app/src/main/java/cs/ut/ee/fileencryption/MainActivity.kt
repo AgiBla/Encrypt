@@ -2,7 +2,10 @@ package cs.ut.ee.fileencryption
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -42,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         for (name in db!!.getFileDao().loadFilenames()) {
             Log.i("patata", name)
         }
-        // db.clearAllTables()
 
 
 
@@ -88,11 +90,25 @@ class MainActivity : AppCompatActivity() {
 
         // File selected
         else if (resultCode == -1 && data != null){
-            FILE_PATH = data.data!!.path!!
+            val uri = data.data
 
-            val intent = Intent(this, EncryptFile()::class.java)
-            intent.putExtra("path", FILE_PATH)
-            startActivityForResult(intent, 1)
+            // Code from: https://stackoverflow.com/questions/3401579
+            if (uri!!.scheme.toString().compareTo("content") == 0) {
+                val cursor: Cursor = contentResolver.query(uri, null, null, null, null)!!
+                if (cursor.moveToFirst()) {
+                    val column_index: Int =
+                        cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA) //Instead of "MediaStore.Images.Media.DATA" can be used "_data"
+                    val filePathUri =
+                        Uri.parse(cursor.getString(column_index))
+                    val file_name = filePathUri.lastPathSegment.toString()
+                    val file_path = filePathUri.path
+
+                    // Create new activity to encrypt selected file
+                    val intent = Intent(this, EncryptFile()::class.java)
+                    intent.putExtra("path", file_path)
+                    startActivityForResult(intent, 1)
+                }
+            }
         }
 
         // No file selected
