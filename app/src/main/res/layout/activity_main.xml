@@ -20,32 +20,32 @@
 
     <Button
         android:id="@+id/encryptButton"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-
         android:layout_width="270dp"
         android:layout_height="60dp"
-        android:background="@drawable/buttonshape"
 
         android:layout_marginTop="100dp"
+        android:background="@drawable/buttonshape"
         android:onClick="EncryptFile"
-        android:text="Encrypt a file "
+
+        android:text="@string/encrypt_file"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/fileDecryptButton"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-
         android:layout_width="270dp"
         android:layout_height="60dp"
-        android:background="@drawable/buttonshape"
 
         android:layout_marginTop="50dp"
+        android:background="@drawable/buttonshape"
         android:onClick="DecryptFile"
-        android:text="Decrypt file"
+
+        android:text="@string/decrypt_file"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

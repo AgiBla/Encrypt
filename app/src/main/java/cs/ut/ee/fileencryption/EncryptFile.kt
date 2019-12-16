@@ -71,7 +71,7 @@ class EncryptFile : AppCompatActivity() {
 
                 // Show error message
                 runOnUiThread {
-                    Toast.makeText(applicationContext, "Unable to connect to Random.org", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, R.string.toast_4, Toast.LENGTH_SHORT).show()
                     pBar.visibility = View.INVISIBLE
                 }
             }

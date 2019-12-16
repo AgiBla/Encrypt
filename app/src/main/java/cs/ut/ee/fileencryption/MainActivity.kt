@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     fun OpenFileExplorer(requestcode: Int){
 
-        val toast = Toast.makeText(applicationContext, "Select file you want to encrypt", Toast.LENGTH_LONG)
+        val toast = Toast.makeText(applicationContext, R.string.toast_1, Toast.LENGTH_LONG)
         toast.show()
 
         val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
         // Result code correctly encrypted file
         if (resultCode == 10){
-            Toast.makeText(applicationContext, "File encrypted successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.toast_2, Toast.LENGTH_SHORT).show()
         }
 
         // File selected
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
         // No file selected
         else {
-            Toast.makeText(applicationContext, "File not selected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.toast_3, Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cifrado De Archivos</string>
+    <string name="decrypt_file">DESENCRIPTAR ARCHIVO</string>
+    <string name="encrypt">ENCRIPTAR</string>
+    <string name="encrypt_file">ENCRIPTAR ARCHIVO</string>
+    <string name="pin_code">Crea un código PIN</string>
+    <string name="selected_file">Has elegido el archivo:</string>
+    <string name="characters">El PIN debe contener al menos 4 caracteres</string>
+    <string name="toast_1">Seleccione el archivo que desea encriptar</string>
+    <string name="toast_2">Archivo encriptado con éxito</string>
+    <string name="toast_3">Archivo no seleccionado</string>
+    <string name="toast_4">No se pudo conectar con Random.org</string>
+</resources>
