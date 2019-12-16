@@ -62,13 +62,9 @@ class MainActivity : AppCompatActivity() {
 
     fun DecryptFile(view: View) {
 
-        OpenFileExplorer(20)
-        /*
-        val selectedUri = Uri.parse(Environment.getExternalStorageDirectory().toString() + "/Pictures/")
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(selectedUri, "resource/folder")
-        startActivityForResult(intent, 20)
-        */
+        val intent = Intent(this, DecryptFile::class.java)
+        startActivity(intent)
+
     }
 
     fun OpenFileExplorer(requestcode: Int){
