@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
         // Result code correctly encrypted file
         if (resultCode == 10){
-            Toast.makeText(applicationContext, "File encrypted successfully", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "File encrypted successfully", Toast.LENGTH_SHORT).show()
         }
 
         // File selected
@@ -103,9 +103,12 @@ class MainActivity : AppCompatActivity() {
                     val file_name = filePathUri.lastPathSegment.toString()
                     val file_path = filePathUri.path
 
+                    Toast.makeText(applicationContext, file_path, Toast.LENGTH_SHORT).show()
+
                     // Create new activity to encrypt selected file
                     val intent = Intent(this, EncryptFile()::class.java)
                     intent.putExtra("path", file_path)
+                    intent.putExtra("name", file_name)
                     startActivityForResult(intent, 1)
                 }
             }

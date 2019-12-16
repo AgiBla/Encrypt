@@ -3,6 +3,7 @@ package cs.ut.ee.fileencryption
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.BlockCipher
 import com.github.rs3vans.krypto.Bytes
@@ -28,16 +29,21 @@ class EncryptFile : AppCompatActivity() {
         setContentView(R.layout.encryptfile)
 
         path = intent.getStringExtra("path")
+        name = intent.getStringExtra("name")
 
         // Write name of the file in TextView
-        val fileName = path.split("/")
-        name = fileName[fileName.size-1]
         textFileName.text = name
 
         encryptButton.setOnClickListener() {
 
             if (editText.text.toString().length >= 4) {
                 val newPin = editText.text.toString().toInt()
+
+                // Hide previous error message
+                textError.visibility = View.INVISIBLE
+
+                // Make loading circle animation play
+                pBar.visibility = View.VISIBLE
 
                 // First step in encryption. Generate completely random key from Random.org
                 getRandomString(newPin)
@@ -61,7 +67,14 @@ class EncryptFile : AppCompatActivity() {
             .build()
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
+            override fun onFailure(call: Call, e: IOException) {
+
+                // Show error message
+                runOnUiThread {
+                    Toast.makeText(applicationContext, "Unable to connect to Random.org", Toast.LENGTH_SHORT).show()
+                    pBar.visibility = View.INVISIBLE
+                }
+            }
 
             // When receiving answer from HTTP request
             override fun onResponse(call: Call, response: Response) {

@@ -13,7 +13,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:text="You have selected the file:"
-        android:textColor="#363636"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="10dp"
-        android:textColor="#363636"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text1" />
@@ -37,7 +37,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="50dp"
         android:text="Create PIN code"
-        android:textColor="#363636"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,12 +48,12 @@
         android:layout_width="194dp"
         android:layout_height="62dp"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#363636"
+        android:backgroundTint="@color/colorPrimary"
         android:ems="10"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="#363636"
-        android:textColorHighlight="#363636"
+        android:textColor="@color/colorPrimary"
+        android:textColorHighlight="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,5 +88,23 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textError" />
+
+    <ProgressBar
+        android:id="@+id/pBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="192dp"
+        android:layout_height="182dp"
+        android:backgroundTintMode="add"
+        android:foregroundTintMode="add"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimary"
+        android:indeterminateTintMode="src_atop"
+        android:progressBackgroundTintMode="add"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/encryptButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
