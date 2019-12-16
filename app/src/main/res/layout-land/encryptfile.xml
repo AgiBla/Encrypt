@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/text1"
@@ -23,8 +23,7 @@
         android:id="@+id/textFileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="64dp"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +46,7 @@
         android:id="@+id/editText"
         android:layout_width="194dp"
         android:layout_height="62dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimary"
         android:ems="10"
@@ -56,8 +56,6 @@
         android:textColorHighlight="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text2" />
 
@@ -65,12 +63,12 @@
         android:id="@+id/textError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:text="@string/characters"
         android:textColor="#FF0000"
         android:textSize="18sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -85,30 +83,30 @@
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textError" />
 
     <TextView
         android:id="@+id/textError2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="319dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="40dp"
         android:text="@string/unable"
         android:textAlignment="center"
         android:textColor="#FF0000"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/encryptButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/pBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="192dp"
         android:layout_height="182dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="70dp"
         android:backgroundTintMode="add"
         android:foregroundTintMode="add"
         android:indeterminate="true"
@@ -116,10 +114,7 @@
         android:indeterminateTintMode="src_atop"
         android:progressBackgroundTintMode="add"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/encryptButton" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
