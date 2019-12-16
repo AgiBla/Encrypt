@@ -6,6 +6,7 @@
     <string name="pin_code">Create a PIN code</string>
     <string name="encrypt">ENCRYPT</string>
     <string name="characters">PIN should be at least 4 characters</string>
+    <string name="unable">This file cannot be encrypted\nTry moving it to Downloads folder and try again</string>
 
 
     <string name="toast_1">Select file you want to encrypt</string>

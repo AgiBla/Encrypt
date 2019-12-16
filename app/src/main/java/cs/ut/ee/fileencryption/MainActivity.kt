@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
         if(ContextCompat.checkSelfPermission(this , android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
             val requestedPermissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(this, requestedPermissions, 1)
@@ -89,26 +88,38 @@ class MainActivity : AppCompatActivity() {
         else if (resultCode == -1 && data != null){
             val uri = data.data
 
-            // Code from: https://stackoverflow.com/questions/3401579
-            if (uri!!.scheme.toString().compareTo("content") == 0) {
-                val cursor: Cursor = contentResolver.query(uri, null, null, null, null)!!
-                if (cursor.moveToFirst()) {
-                    val column_index: Int =
-                        cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA) //Instead of "MediaStore.Images.Media.DATA" can be used "_data"
-                    val filePathUri =
-                        Uri.parse(cursor.getString(column_index))
-                    val file_name = filePathUri.lastPathSegment.toString()
-                    val file_path = filePathUri.path
+            var name = ""
+            var path = ""
 
-                    Toast.makeText(applicationContext, file_path, Toast.LENGTH_SHORT).show()
+            try {
+                // This should try to get the absolute path. Seem to only work on older android versions
+                // Code from: https://stackoverflow.com/questions/3401579
+                if (uri!!.scheme.toString().compareTo("content") == 0) {
+                    val cursor: Cursor = contentResolver.query(uri, null, null, null, null)!!
+                    if (cursor.moveToFirst()) {
+                        val column_index: Int =
+                            cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA) //Instead of "MediaStore.Images.Media.DATA" can be used "_data"
+                        val filePathUri =
+                            Uri.parse(cursor.getString(column_index))
+                        name = filePathUri.lastPathSegment.toString()
+                        path = filePathUri.path!!
 
-                    // Create new activity to encrypt selected file
-                    val intent = Intent(this, EncryptFile()::class.java)
-                    intent.putExtra("path", file_path)
-                    intent.putExtra("name", file_name)
-                    startActivityForResult(intent, 1)
+                    }
                 }
+            } catch (e : Exception) {
+                path = uri!!.path!!.split(":")[1]
+
+                val fileName = path.split("/")
+                name = fileName[fileName.size-1]
             }
+
+            Toast.makeText(applicationContext, path, Toast.LENGTH_SHORT).show()
+
+            // Create new activity to encrypt selected file
+            val intent = Intent(this, EncryptFile()::class.java)
+            intent.putExtra("path", path)
+            intent.putExtra("name", name)
+            startActivityForResult(intent, 1)
         }
 
         // No file selected

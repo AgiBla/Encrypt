@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.encryptfile.*
 import okhttp3.*
 import java.io.File
 import java.io.IOException
+import java.lang.Exception
 import javax.crypto.spec.SecretKeySpec
 
 
@@ -21,7 +22,6 @@ class EncryptFile : AppCompatActivity() {
 
     private val client = OkHttpClient()
     private var path = ""
-
     private var name = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +30,13 @@ class EncryptFile : AppCompatActivity() {
 
         path = intent.getStringExtra("path")
         name = intent.getStringExtra("name")
+
+        try {
+            File(path).readBytes()
+        } catch (e : Exception) {
+            textError2.visibility = View.VISIBLE
+            encryptButton.isEnabled = false
+        }
 
         // Write name of the file in TextView
         textFileName.text = name
@@ -91,7 +98,6 @@ class EncryptFile : AppCompatActivity() {
         // Create cipher with generated key and AES algorithm used for encryption
         val cipher = BlockCipher(SecretKeySpec(key.toByteArray(), "AES"))
 
-        Log.i("patata", path)
         // Read content of the file
         val file = File(path)
         val bytes = file.readBytes()
