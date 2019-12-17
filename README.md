@@ -59,7 +59,7 @@ this application uses a local database to store and read the encrypted files
 
 
 - The application enables three different languages using Android resource
- localization a& orientation localization as well as providing different 
+ localization & orientation localization as well as providing different 
  UI layouts for landscape and portrait modes for all views.
  
  
