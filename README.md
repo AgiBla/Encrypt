@@ -19,26 +19,26 @@ database and preventing unauthorized access to your sensitive files.
 ## Core Blocks
 
 - The application features multiple screen views. 
-
+<p align="center">
 <!-- ![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png) -->
 <img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png" width="300" height="500" />
 <img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt_portrait.png" width="300" height="500" />
 <img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/4_Decrypt.png" width="300" height="500" />
-
+</p>
 - The application features a setting screen where a user is able to
 delete completely the database.
-
+<p align="center">
 <img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/5_Settings.png" width="300" height="500" />
-
+</p>
 - The application takes care of permission management by asking the user
 for permission of accessing the phones internal storage and furthermore
 handles lifecycle management allowing the application to be safely paused
 and  terminated as well as used in
 portrait mode and landscape mode.
-
+<p align="center">
 <img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/0_Permissions.png" width="300" height="500" />
-<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt landscape.png" width="300" height="500" />
-
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt landscape.png" width="500" height="300" />
+</p>
 
 
 ## Feature Blocks
@@ -46,13 +46,11 @@ portrait mode and landscape mode.
 - With [Room](https://developer.android.com/topic/libraries/architecture/room)
 this application uses a local database to store and read the encrypted files
 
-TODO SCREENSHOT
 
 - The application enables three different languages using Android resource
  localization a& orientation localization as well as providing different 
  UI layouts for landscape and portrait modes for all views.
  
- TODO SCREENSHOT
  
 - FileEncryption uses two APIs
     - [OkHttp](https://square.github.io/okhttp/) - A reliable OpenSource
