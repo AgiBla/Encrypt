@@ -25,7 +25,7 @@ TODO INSERT SCREENSHOT WHEN APP IS FINISHED AND PRESENT USE CASE
 TODO SCREENSHOT
 
 - The application features a setting screen where a user is able to
-configure the language, or select between light mode and dark mode
+delete completely the database.
 
 TODO SCREENSHOT
 
@@ -68,11 +68,25 @@ TODO SCREENSHOT
 
 - The initial idea we had in the presentation didn't change during the development of the project
  and we feel like the end result is a good reflection of the idea we exposed three weeks ago.
+ We had to make some small changes because of some limitations of the programming language
+ but we don't feel like any of these changes modified the user experience we had in mind.
 
 
-TODO
 - Which features would you implement, what would you do differently if 
 you were to continue this project with more time?
-    
- 
- 
+
+ Supposing we want to release this app to the public there're a few changes we would make.
+
+ First, we would not use Random.org for generating random numbers. There're java functions that 
+ achieve almost as good randomness as Random.org that while working completely offline. Using this 
+ method would allow the user to use the app without an active internet connection, not raising privacy 
+ concerns about what data is the app sending or receiving during the encryption process.
+
+ Another change would be to completely remove the database from our app, and instead, use a proprietary 
+ file format where we can store all the data we're now storing in the database. This could allow users 
+ to move encrypted files to other folders, change names, or even move them between devices without losing 
+ access to their files.
+
+ When talking about security, we realized that the salt used gives away the information of the length of 
+ the PIN code used, and this could make an attacker easier to brute force. If we were to continue with this 
+ project we would use a Salt with the same length for every file so no information about the PIN is public.
