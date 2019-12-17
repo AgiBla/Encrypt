@@ -20,7 +20,8 @@ database and preventing unauthorized access to your sensitive files.
 
 - The application features multiple screen views. 
 
-![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png)
+<!-- ![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png) -->
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png" width="200" height="200" />
 
 ![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt_portrait.png)
 
