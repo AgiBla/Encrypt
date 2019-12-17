@@ -21,20 +21,14 @@ database and preventing unauthorized access to your sensitive files.
 - The application features multiple screen views. 
 
 <!-- ![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png) -->
-<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png" width="200" height="200" />
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png" width="300" height="500" />
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt_portrait.png" width="300" height="500" />
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/4_Decrypt.png" width="300" height="500" />
 
-![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt_portrait.png)
-
-![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/4_Decrypt.png)
 - The application features a setting screen where a user is able to
 delete completely the database.
 
-![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png)
-
-- The application features a setting screen where a user is able to delete
-a the database
-
-![Settings screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/5_Settings.png)
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/5_Settings.png" width="300" height="500" />
 
 - The application takes care of permission management by asking the user
 for permission of accessing the phones internal storage and furthermore
@@ -42,7 +36,9 @@ handles lifecycle management allowing the application to be safely paused
 and  terminated as well as used in
 portrait mode and landscape mode.
 
-![Settings screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/0_Permissions.png)
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/0_Permissions.png" width="300" height="500" />
+<img src="https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt landscape.png" width="300" height="500" />
+
 
 
 ## Feature Blocks
@@ -79,8 +75,6 @@ TODO SCREENSHOT
  We had to make some small changes because of some limitations of the programming language
  but we don't feel like any of these changes modified the user experience we had in mind.
 
-
-TODO
 - Which features would you implement, what would you do differently if 
 you were to continue this project with more time?
 
