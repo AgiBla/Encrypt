@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dateiverschlüsselung</string>
-    <string name="decrypt_file">DECRYPT EINE DATEI</string>
-    <string name="encrypt">ENCRYPT</string>
-    <string name="decrypt">DECRYPT</string>
+    <string name="decrypt_file">ENTSCHLÜSSEL EINE DATEI</string>
+    <string name="encrypt">ENTSCHLÜSSEL</string>
+    <string name="decrypt">VERSCHLÜSSEL</string>
     <string name="encrypt_file">EINE DATEI VERSCHLÜSSELN</string>
     <string name="pin_code">Erstellen Sie einen PIN-Code</string>
     <string name="pin_code1">   ...</string>
     <string name="selected_file">Sie haben die Datei ausgewählt:</string>
-    <string name="characters">Die PIN sollte aus mindestens 4 Zeichen bestehen</string>
+    <string name="characters">Der PIN sollte aus mindestens 4 Zeichen bestehen</string>
     <string name="pin_incorrect">   ...</string>
-    <string name="unable">Diese Datei kann nicht verschlüsselt werden\nVersuchen Sie, es in den Ordner Downloads zu verschieben und versuchen Sie es erneut. </string>
+    <string name="unable">Diese Datei kann nicht verschlüsselt werden\nVersuchen Sie es in den Ordner Downloads zu verschieben und versuchen Sie es erneut. </string>
     <string name="not_found">   ...</string>
     <string name="delete_file"> ...</string>
 
