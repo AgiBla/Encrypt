@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import android.view.Menu
+import android.view.MenuItem
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,19 @@ class MainActivity : AppCompatActivity() {
             val requestedPermissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(this, requestedPermissions, 1)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            R.id.action_settings -> startActivity(Intent(this, SettingsActivity()::class.java))
+        }
+        return true
     }
 
 

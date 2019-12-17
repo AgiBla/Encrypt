@@ -23,6 +23,7 @@
         <activity android:name=".EncryptFile"> </activity>
         <activity android:name=".DecryptFile"> </activity>
         <activity android:name=".FileList"> </activity>
+        <activity android:name=".SettingsActivity"> </activity>
     </application>
 
 </manifest>

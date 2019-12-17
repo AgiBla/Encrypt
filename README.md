@@ -60,9 +60,17 @@ TODO SCREENSHOT
     
 ## Development Process
 
-- How was work distributed
-- How did the initial idea you showed in the preliminary presentation 
-change over time.
+- The work was distributed among the team members considering the strengths of each of them
+ to make sure everyone felt comfortable with their part. Tobias implemented the database and
+ worked on the final report . On the other hand, Tasio implemented the file encryption and
+ the Random.org request . Meanwhile Jon Ander worked on the app translation and the UI
+ alongside Tasio.
+
+- The initial idea we had in the presentation didn't change during the development of the project
+ and we feel like the end result is a good reflection of the idea we exposed three weeks ago.
+
+
+TODO
 - Which features would you implement, what would you do differently if 
 you were to continue this project with more time?
     

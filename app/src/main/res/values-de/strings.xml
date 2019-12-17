@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Dateiverschlüsselung</string>
     <string name="decrypt_file">ENTSCHLÜSSEL EINE DATEI</string>
-    <string name="encrypt">ENTSCHLÜSSEL</string>
-    <string name="decrypt">VERSCHLÜSSEL</string>
+    <string name="encrypt">ENTSCHLÜSSELN</string>
+    <string name="decrypt">VERSCHLÜSSELN</string>
     <string name="encrypt_file">EINE DATEI VERSCHLÜSSELN</string>
     <string name="pin_code">Erstellen Sie einen PIN-Code</string>
     <string name="pin_code1">   ...</string>
