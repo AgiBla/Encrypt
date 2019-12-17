@@ -88,7 +88,7 @@ class DecryptFile : AppCompatActivity() {
 
         // Remove file entry from database
         deleteButton.setOnClickListener() {
-            db.getFileDao().deleteRecipes(file)
+            db.getFileDao().deleteFile(file)
             finish()
         }
     }

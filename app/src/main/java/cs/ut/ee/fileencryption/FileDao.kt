@@ -33,7 +33,7 @@ interface FileDao {
      * Delete a file from the db
      */
     @Delete
-    fun deleteRecipes(vararg file: FileEntity)
+    fun deleteFile(vararg file: FileEntity)
 
     @Query("DELETE  FROM file")
     fun deleteAll()

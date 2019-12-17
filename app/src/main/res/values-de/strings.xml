@@ -6,18 +6,18 @@
     <string name="decrypt">VERSCHLÜSSELN</string>
     <string name="encrypt_file">EINE DATEI VERSCHLÜSSELN</string>
     <string name="pin_code">Erstellen Sie einen PIN-Code</string>
-    <string name="pin_code1">   ...</string>
+    <string name="pin_code1">PIN-Code einfügen</string>
     <string name="selected_file">Sie haben die Datei ausgewählt:</string>
     <string name="characters">Der PIN sollte aus mindestens 4 Zeichen bestehen</string>
-    <string name="pin_incorrect">   ...</string>
+    <string name="pin_incorrect">PIN code nicht korrekt</string>
     <string name="unable">Diese Datei kann nicht verschlüsselt werden\nVersuchen Sie es in den Ordner Downloads zu verschieben und versuchen Sie es erneut. </string>
-    <string name="not_found">   ...</string>
-    <string name="delete_file"> ...</string>
-    <string name="delete_all">  ...</string>
+    <string name="not_found">Verchlüsselte Datei kann nicht gefunden werden</string>
+    <string name="delete_file">Lösche Datei</string>
+    <string name="delete_all">Lösche Datenbank</string>
 
     <string name="toast_1">Wählen Sie die zu verschlüsselnde Datei aus</string>
     <string name="toast_2">Datei erfolgreich verschlüsselt</string>
     <string name="toast_3">Datei nicht ausgewählt</string>
     <string name="toast_4">Verbindung zu Random.org nicht möglich</string>
-    <string name="toast_5"> ...</string>
+    <string name="toast_5">Es existiert bereits eine Date mit diesem Namen</string>
 </resources>

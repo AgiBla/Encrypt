@@ -14,20 +14,24 @@ database and preventing unauthorized access to your sensitive files.
 
 ## How it works
 
-![Encryption process concept](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/encryption_concept.png)
-
-TODO INSERT SCREENSHOT WHEN APP IS FINISHED AND PRESENT USE CASE
+![Encryption process concept](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/encryption_concept.jpg)
 
 ## Core Blocks
 
 - The application features multiple screen views. 
 
-TODO SCREENSHOT
+![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png)
 
-- The application features a setting screen where a user is able to
-configure the language, or select between light mode and dark mode
+![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/2_Encrypt_portrait.png)
 
-TODO SCREENSHOT
+![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/4_Decrypt.png)
+
+![Main screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/1_MainScreen.png)
+
+- The application features a setting screen where a user is able to delete
+a the database
+
+![Settings screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/5_Settings.png)
 
 - The application takes care of permission management by asking the user
 for permission of accessing the phones internal storage and furthermore
@@ -35,7 +39,8 @@ handles lifecycle management allowing the application to be safely paused
 and  terminated as well as used in
 portrait mode and landscape mode.
 
-TODO SCREENSHOT
+![Settings screen](https://raw.githubusercontent.com/Nusserle/FileEncryption/master/app/src/main/res/images/0_Permissions.png)
+
 
 ## Feature Blocks
 
