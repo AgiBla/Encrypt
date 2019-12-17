@@ -4,7 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.*
+import kotlinx.android.synthetic.main.decryptfile.*
 import kotlinx.android.synthetic.main.encryptfile.*
+import kotlinx.android.synthetic.main.encryptfile.editText
+import kotlinx.android.synthetic.main.encryptfile.encryptButton
+import kotlinx.android.synthetic.main.encryptfile.pBar
+import kotlinx.android.synthetic.main.encryptfile.textError
+import kotlinx.android.synthetic.main.encryptfile.textError2
+import kotlinx.android.synthetic.main.encryptfile.textFileName
 import java.io.File
 import javax.crypto.spec.SecretKeySpec
 
@@ -22,8 +29,10 @@ class DecryptFile : AppCompatActivity() {
         val db = LocalDbClient.getDatabase(this)
         val file = db!!.getFileDao().findByName(name)
 
+        // Try to read from file. If exception file doesn't exist
         try {
             content = File(file.contentByte).readBytes()
+            deleteButton.visibility = View.INVISIBLE
         } catch (e : Exception) {
             textError2.visibility = View.VISIBLE
             encryptButton.isEnabled = false
@@ -72,7 +81,15 @@ class DecryptFile : AppCompatActivity() {
                 } catch (e : java.lang.Exception) {
                     textError.visibility = View.VISIBLE
                 }
+            } else {
+                textError.visibility = View.VISIBLE
             }
+        }
+
+        // Remove file entry from database
+        deleteButton.setOnClickListener() {
+            db.getFileDao().deleteRecipes(file)
+            finish()
         }
     }
 }

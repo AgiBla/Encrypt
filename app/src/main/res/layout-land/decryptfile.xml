@@ -88,13 +88,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textError" />
 
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+
+        android:layout_marginTop="30dp"
+        android:background="@drawable/buttonshape_red"
+        android:text="@string/delete_file"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textError"
+        tools:visibility="invisible" />
+
     <TextView
         android:id="@+id/textError2"
         android:layout_width="305dp"
         android:layout_height="95dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="40dp"
-        android:text="@string/unable"
+        android:text="@string/not_found"
         android:textAlignment="center"
         android:textColor="#FF0000"
         android:textSize="18sp"
