@@ -14,6 +14,7 @@
     <string name="unable">No se puede encriptar este archivo\nPrueba a moverlo a la carpeta Descargas</string>
     <string name="not_found">No se ha podido encontrar el archivo encriptado</string>
     <string name="delete_file">Eliminar archivo</string>
+    <string name="delete_all">Eliminar base de datos</string>
 
     <string name="toast_1">Seleccione el archivo que desea encriptar</string>
     <string name="toast_2">Archivo encriptado con éxito</string>
