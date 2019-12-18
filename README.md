@@ -102,3 +102,6 @@ you were to continue this project with more time?
  When talking about security, we realized that the salt used gives away the information of the length of 
  the PIN code used, and this could make an attacker easier to brute force. If we were to continue with this 
  project we would use a Salt with the same length for every file so no information about the PIN is public.
+ 
+
+### [Link to github repository](https://github.com/Nusserle/FileEncryption)
