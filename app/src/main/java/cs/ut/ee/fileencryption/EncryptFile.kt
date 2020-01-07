@@ -1,22 +1,17 @@
 package cs.ut.ee.fileencryption
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.*
 import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
 import kotlinx.android.synthetic.main.encryptfile.*
-import okhttp3.*
 import java.io.File
-import java.io.IOException
 import javax.crypto.spec.SecretKeySpec
 
 
 class EncryptFile : AppCompatActivity() {
 
-    private val client = OkHttpClient()
     private var path = ""
     private var name = ""
 
@@ -37,7 +32,7 @@ class EncryptFile : AppCompatActivity() {
         // Write name of the file in TextView
         textFileName.text = name
 
-        encryptButton.setOnClickListener() {
+        encryptButton.setOnClickListener {
 
             if (editText.text.toString().length >= 4) {
                 val newPin = editText.text.toString().toInt()
@@ -87,8 +82,22 @@ class EncryptFile : AppCompatActivity() {
         val encryptedContent = secretCipher.encrypt(content)
 
         try {
-            var f = File(path + ".crypt")
-            f.writeBytes(encryptedContent.bytes.byteArray)
+            val f = File(path + ".crypt")
+
+            // Write all data. ##### is used as a way of separating
+            f.writeText("$name#####", Charsets.ISO_8859_1)
+            f.appendBytes(encryptedKey.bytes.byteArray)
+            f.appendText("#####", Charsets.ISO_8859_1)
+            f.appendBytes(encryptedKey.initVector?.byteArray!!)
+            f.appendText("#####", Charsets.ISO_8859_1)
+            f.appendBytes(encryptedCheck.bytes.byteArray)
+            f.appendText("#####", Charsets.ISO_8859_1)
+            f.appendBytes(encryptedCheck.initVector?.byteArray!!)
+            f.appendText("#####", Charsets.ISO_8859_1)
+            f.appendBytes(encryptedContent.bytes.byteArray)
+            f.appendText("#####", Charsets.ISO_8859_1)
+            f.appendBytes(encryptedContent.initVector?.byteArray!!)
+
         } catch (e: java.lang.Exception) {
             runOnUiThread {
                 textError2.visibility = View.VISIBLE
