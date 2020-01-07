@@ -1,6 +1,7 @@
 package cs.ut.ee.fileencryption
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.*
@@ -43,20 +44,26 @@ class DecryptFile : AppCompatActivity() {
 
         encryptButton.setOnClickListener() {
 
+            val len = editText.text.toString().length
             // Inserted pin is at least 4 numbers
-            if (editText.text.toString().length >= 4) {
+            if (len >= 4) {
 
                 // Create decryption key combining pin and salt
-                val key = editText.text.toString().toString() + file.key
+                val key = editText.text.toString() + "0".repeat(16-len)
+                Log.i("patata", key)
 
                 // Create cipher with generated key and AES algorithm used for encryption
                 val cipher = BlockCipher(SecretKeySpec(key.toByteArray(), "AES"))
 
-                try {
+            //    try {
 
                     // Decrypt check. If equals name then pin is correct
                     var check = cipher.decrypt(Encrypted(Bytes(file.checkByte), Bytes(file.checkInit)))
                     if (check.bytes.toDecodedString() == name){
+
+                        // Recover secret key and create new cipher
+                        val decryptedKey = cipher.decrypt(Encrypted(Bytes(file.key), Bytes(file.keyInit)))
+                        val secretCipher = BlockCipher(importAesKey(decryptedKey.bytes))
 
                         // Show animation decrypting
                         pBar.visibility = View.VISIBLE
@@ -66,7 +73,7 @@ class DecryptFile : AppCompatActivity() {
                         val bytes = File(file.contentByte).readBytes()
 
                         // Decrypt content
-                        var content = cipher.decrypt(Encrypted(Bytes(bytes), Bytes(file.contentInit)))
+                        var content = secretCipher.decrypt(Encrypted(Bytes(bytes), Bytes(file.contentInit)))
 
                         // Write new file
                         var f = File(file.contentByte.replace(".crypt", ""))
@@ -78,9 +85,9 @@ class DecryptFile : AppCompatActivity() {
                         textError.visibility = View.VISIBLE
                     }
 
-                } catch (e : java.lang.Exception) {
-                    textError.visibility = View.VISIBLE
-                }
+       //         } catch (e : java.lang.Exception) {
+        //            textError.visibility = View.VISIBLE
+        //        }
             } else {
                 textError.visibility = View.VISIBLE
             }

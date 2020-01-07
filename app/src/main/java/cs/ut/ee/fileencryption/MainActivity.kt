@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
+import com.github.rs3vans.krypto.*
+import java.io.File
+import javax.crypto.spec.SecretKeySpec
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,10 +25,42 @@ class MainActivity : AppCompatActivity() {
     lateinit var FILE_PATH : String
     var ENCRYPT_FOLDER_PATH = "????" //to be determined
 
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+
+
+        val key = "1234" + "0".repeat(12)
+
+        val secretKey = generateRandomAesKey()
+
+        // Create cipher with generated key and AES algorithm used for encryption
+        val cipher = BlockCipher(SecretKeySpec(key.toByteArray(), "AES"))
+        val secretCipher = BlockCipher(secretKey)
+
+        val encryptedKey = cipher.encrypt(Decrypted(secretKey.toBytes()))
+
+
+        // Read content of the file
+        val bytes = "tasioAguirre".serializeToBytes().byteArray
+
+        // Encrypt file content and its name (which will be used to check if pin is correct)
+        val content = Decrypted(Bytes(bytes))
+        val cryptcont = secretCipher.encrypt(content)
+
+        val decryptedKey  =cipher.decrypt(Encrypted(Bytes(encryptedKey.bytes.byteArray), Bytes(encryptedKey.initVector!!.byteArray)))
+
+
+        val cipher3 = BlockCipher(importAesKey(decryptedKey.bytes))
+
+
+
+        val final = cipher3.decrypt(cryptcont)
+
+        Log.i("patata", final.bytes.byteArray.decodeToString())
+
 
         if(ContextCompat.checkSelfPermission(this , android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
             val requestedPermissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)

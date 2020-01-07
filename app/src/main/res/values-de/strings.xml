@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Dateiverschlüsselung</string>
+    <string name="app_name">Encrypt</string>
     <string name="decrypt_file">ENTSCHLÜSSEL EINE DATEI</string>
     <string name="encrypt">ENTSCHLÜSSELN</string>
     <string name="decrypt">VERSCHLÜSSELN</string>

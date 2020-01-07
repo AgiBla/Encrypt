@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cifrado De Archivos</string>
+    <string name="app_name">Encrypt</string>
     <string name="decrypt_file">DESENCRIPTAR ARCHIVO</string>
     <string name="encrypt">ENCRIPTAR</string>
     <string name="decrypt">DESENCRIPTAR</string>

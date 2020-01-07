@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">File Encryption</string>
+    <string name="app_name">Encrypt</string>
     <string name="encrypt_file">ENCRYPT A FILE</string>
     <string name="decrypt_file">DECRYPT A FILE</string>
     <string name="selected_file">You have selected the file:</string>

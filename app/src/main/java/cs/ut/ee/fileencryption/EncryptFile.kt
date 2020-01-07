@@ -1,13 +1,11 @@
 package cs.ut.ee.fileencryption
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.github.rs3vans.krypto.BlockCipher
-import com.github.rs3vans.krypto.Bytes
-import com.github.rs3vans.krypto.Decrypted
-import com.github.rs3vans.krypto.toBytes
+import com.github.rs3vans.krypto.*
 import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
 import kotlinx.android.synthetic.main.encryptfile.*
 import okhttp3.*
@@ -50,8 +48,7 @@ class EncryptFile : AppCompatActivity() {
                 // Make loading circle animation play
                 pBar.visibility = View.VISIBLE
 
-                // First step in encryption. Generate completely random key from Random.org
-                getRandomString(newPin)
+                encrypt(newPin)
 
             } else {
                 textError.visibility = View.VISIBLE
@@ -61,51 +58,33 @@ class EncryptFile : AppCompatActivity() {
 
 
     // Reads HTTP request and receives random string from Random.org
-    private fun getRandomString(pinCode : Int) {
+    private fun encrypt(pinCode : Int) {
 
-        // Url used to generate string of 16 characters containing a-z, A-Z and 0-9
-        val len = 15-pinCode.toString().length
-        val url = "https://www.random.org/strings/?num=1&len=$len&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new"
+        // Generate first key used to encrypt the more secure key and its cipher
+        val len = 16-pinCode.toString().length
+        val key = pinCode.toString() + "0".repeat(len)
 
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-
-                // Show error message
-                runOnUiThread {
-                    Toast.makeText(applicationContext, R.string.toast_4, Toast.LENGTH_SHORT).show()
-                    pBar.visibility = View.INVISIBLE
-                }
-            }
-
-            // When receiving answer from HTTP request
-            override fun onResponse(call: Call, response: Response) {
-                val salt = response.body()?.string() ?: ""
-                val key = pinCode.toString() + salt
-
-                createCipher(key, salt)
-            }
-        })
-    }
-
-    private fun createCipher(key : String, salt : String){
-
-        // Create cipher with generated key and AES algorithm used for encryption
         val cipher = BlockCipher(SecretKeySpec(key.toByteArray(), "AES"))
+
+
+        // Generate second key used to encrypt and its cipher
+        val secretKey = generateRandomAesKey()
+        val secretCipher = BlockCipher(secretKey)
+
+        // Encrypt secret key with first cipher
+        val encryptedKey = cipher.encrypt(Decrypted(secretKey.toBytes()))
+
 
         // Read content of the file
         val file = File(path)
         val bytes = file.readBytes()
 
-        // Encrypt file content and its name (which will be used to check if pin is correct)
+        // Encrypt file content and its name (using different ciphers)
         val check = Decrypted(name.toBytes())
         val content = Decrypted(Bytes(bytes))
 
         val encryptedCheck = cipher.encrypt(check)
-        val encryptedContent = cipher.encrypt(content)
+        val encryptedContent = secretCipher.encrypt(content)
 
         try {
             var f = File(path + ".crypt")
@@ -122,7 +101,8 @@ class EncryptFile : AppCompatActivity() {
         val encrytedFile = FileEntity(
             0, //0 correspond to 'no value', autogenerate handles it for us
             name,
-            salt,
+            encryptedKey.bytes.byteArray,
+            encryptedKey.initVector?.byteArray!!,
             encryptedCheck.bytes.byteArray,
             encryptedCheck.initVector?.byteArray!!,
             path+".crypt",
@@ -135,5 +115,6 @@ class EncryptFile : AppCompatActivity() {
 
         setResult(10)
         finish()
+
     }
 }
