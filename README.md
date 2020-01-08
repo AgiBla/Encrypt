@@ -47,4 +47,4 @@ Cryptography is a complex and often difficult-to-understand subject.
 The author(s) of Encrypt make no claim of expert knowledge in cryptography and we 
 are not responsible for any loss or leakage of data, sensitive or otherwise.
 
-### [Link to github repository](https://github.com/Nusserle/FileEncryption)
+### [Link to releases](https://github.com/AgiBla/Encrypt/releases)
