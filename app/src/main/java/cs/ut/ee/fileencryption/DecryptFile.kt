@@ -2,6 +2,7 @@ package cs.ut.ee.fileencryption
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.*
 import kotlinx.android.synthetic.main.decryptfile.*
@@ -23,10 +24,27 @@ class DecryptFile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.decryptfile)
 
-        val name = intent.getStringExtra("name")!!
-        var path = intent.getStringExtra("path") ?: ""
+        var name = ""
+        var path = ""
 
-        // File information is in database
+        // Activity launched from app
+        if (intent.hasExtra("name")) {
+            name = intent.getStringExtra("name") ?: ""
+            path = intent.getStringExtra("path") ?: ""
+
+        // Activity launched from file explorer (opening .crypt file)
+        } else {
+            name = intent.data!!.lastPathSegment.toString()
+            path = intent.data!!.path ?: ""
+
+            // Some file explorers may include this
+            path = path.replace("/root", "")
+        }
+
+        // Display path
+        Toast.makeText(applicationContext, path, Toast.LENGTH_LONG).show()
+
+        // Read file information from database
         if (path == "") {
             val db = LocalDbClient.getDatabase(this)
             val file = db!!.getFileDao().findByName(name)

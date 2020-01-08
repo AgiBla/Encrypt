@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity() {
                             Uri.parse(cursor.getString(columnIndex))
                         name = filePathUri.lastPathSegment.toString()
                         path = filePathUri.path!!
-
                     }
                 }
             } catch (e : Exception) {
@@ -98,8 +97,6 @@ class MainActivity : AppCompatActivity() {
                 val fileName = path.split("/")
                 name = fileName[fileName.size-1]
             }
-
-            Toast.makeText(applicationContext, path, Toast.LENGTH_LONG).show()
 
             // Decrypt file
             if (path.endsWith(".crypt")) {
