@@ -106,11 +106,11 @@ class DecryptFile : AppCompatActivity() {
                         val contentByte = Bytes(content[5].toByteArray(Charsets.ISO_8859_1))
                         val contentInit = Bytes(content[6].toByteArray(Charsets.ISO_8859_1))
 
-                        val content = secretCipher.decrypt(Encrypted(contentByte, contentInit))
+                        val originalContent = secretCipher.decrypt(Encrypted(contentByte, contentInit))
 
                         // Write new file
-                        val f = File(path.replace(".crypt", ""))
-                        f.writeBytes(content.bytes.byteArray)
+                        val f = File(path.replace(".crypt", "." + content[0].substringAfterLast('.')))
+                        f.writeBytes(originalContent.bytes.byteArray)
 
                         finish()
 

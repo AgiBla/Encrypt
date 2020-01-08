@@ -1,6 +1,7 @@
 package cs.ut.ee.fileencryption
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.*
@@ -81,8 +82,12 @@ class EncryptFile : AppCompatActivity() {
         val encryptedCheck = cipher.encrypt(check)
         val encryptedContent = secretCipher.encrypt(content)
 
+        // Replace extension with .crypt
+        path = path.substringBeforeLast('.') + ".crypt"
+        Log.i("patata", path)
+
         try {
-            val f = File("$path.crypt")
+            val f = File(path)
 
             // Write all data. ##### is used as a way of separating
             f.writeText("$name#####", Charsets.ISO_8859_1)
@@ -109,8 +114,8 @@ class EncryptFile : AppCompatActivity() {
         // Create object to store in database
         val infoFile = FileEntity(
             0, //0 correspond to 'no value', autogenerate handles it for us
-            name,
-            "$path.crypt"
+            name.substring(0, name.lastIndexOf(".")),
+            path
         )
 
         // Store object in database
