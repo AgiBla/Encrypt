@@ -41,9 +41,6 @@ class DecryptFile : AppCompatActivity() {
             path = path.replace("/root", "")
         }
 
-        // Display path
-        Toast.makeText(applicationContext, path, Toast.LENGTH_LONG).show()
-
         // Read file information from database
         if (path == "") {
             val db = LocalDbClient.getDatabase(this)
@@ -56,6 +53,9 @@ class DecryptFile : AppCompatActivity() {
                 finish()
             }
         }
+
+        // Display path
+        Toast.makeText(applicationContext, path, Toast.LENGTH_LONG).show()
 
         // Try to read from file. If exception file doesn't exist
         try {

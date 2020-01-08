@@ -2,6 +2,7 @@ package cs.ut.ee.fileencryption
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,10 @@ class FileList : AppCompatActivity() {
             val intent = Intent(this, DecryptFile()::class.java)
             intent.putExtra("name", name)
             startActivityForResult(intent, 1)
+        }
+
+        if (listAdapter.isEmpty) {
+            textError.visibility = View.VISIBLE
         }
     }
 

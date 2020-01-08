@@ -36,7 +36,6 @@
                 <data android:pathPattern=".*\\.crypt" />
                 <data android:pathPattern=".*\\..*\\.crypt" />
                 <data android:pathPattern=".*\\..*\\..*\\.crypt" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.crypt" />
             </intent-filter>
         </activity>
         <activity android:name=".FileList"> </activity>
