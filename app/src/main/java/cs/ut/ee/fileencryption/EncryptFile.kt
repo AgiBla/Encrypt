@@ -1,14 +1,15 @@
 package cs.ut.ee.fileencryption
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.*
 import cs.ut.ee.fileencryption.LocalDbClient.getDatabase
 import kotlinx.android.synthetic.main.encryptfile.*
 import java.io.File
+import java.security.MessageDigest
 import javax.crypto.spec.SecretKeySpec
+import java.math.BigInteger
 
 
 class EncryptFile : AppCompatActivity() {
@@ -57,8 +58,10 @@ class EncryptFile : AppCompatActivity() {
     private fun encrypt(pinCode : Int) {
 
         // Generate first key used to encrypt the more secure key and its cipher
-        val len = 16-pinCode.toString().length
-        val key = pinCode.toString() + "0".repeat(len)
+        val digest = MessageDigest.getInstance("MD5")
+        val keyBytes = pinCode.toString().toByteArray()
+        digest.update(keyBytes, 0, keyBytes.size)
+        val key = BigInteger(1, digest.digest()).toString(32).substring(0, 16)
 
         val cipher = BlockCipher(SecretKeySpec(key.toByteArray(), "AES"))
 
@@ -84,7 +87,6 @@ class EncryptFile : AppCompatActivity() {
 
         // Replace extension with .crypt
         path = path.substringBeforeLast('.') + ".crypt"
-        Log.i("patata", path)
 
         try {
             val f = File(path)

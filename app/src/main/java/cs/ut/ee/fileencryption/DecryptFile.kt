@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.encryptfile.textError
 import kotlinx.android.synthetic.main.encryptfile.textError2
 import kotlinx.android.synthetic.main.encryptfile.textFileName
 import java.io.File
+import java.math.BigInteger
+import java.security.MessageDigest
 import javax.crypto.spec.SecretKeySpec
 
 
@@ -76,7 +78,10 @@ class DecryptFile : AppCompatActivity() {
             if (len in 4..16) {
 
                 // Create decryption key combining pin and salt
-                val key = editText.text.toString() + "0".repeat(16-len)
+                val digest = MessageDigest.getInstance("MD5")
+                val keyBytes = editText.text.toString().toByteArray()
+                digest.update(keyBytes, 0, keyBytes.size)
+                val key = BigInteger(1, digest.digest()).toString(32).substring(0, 16)
 
                 // Create cipher with generated key and AES algorithm used for encryption
                 val cipher = BlockCipher(SecretKeySpec(key.toByteArray(), "AES"))
