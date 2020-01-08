@@ -19,8 +19,8 @@ class EncryptFile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.encryptfile)
 
-        path = intent.getStringExtra("path")
-        name = intent.getStringExtra("name")
+        path = intent.getStringExtra("path")!!
+        name = intent.getStringExtra("name")!!
 
         try {
             File(path).readBytes()
@@ -34,7 +34,7 @@ class EncryptFile : AppCompatActivity() {
 
         encryptButton.setOnClickListener {
 
-            if (editText.text.toString().length >= 4) {
+            if (editText.text.toString().length in 4..16) {
                 val newPin = editText.text.toString().toInt()
 
                 // Hide previous error message
@@ -82,7 +82,7 @@ class EncryptFile : AppCompatActivity() {
         val encryptedContent = secretCipher.encrypt(content)
 
         try {
-            val f = File(path + ".crypt")
+            val f = File("$path.crypt")
 
             // Write all data. ##### is used as a way of separating
             f.writeText("$name#####", Charsets.ISO_8859_1)
@@ -107,20 +107,15 @@ class EncryptFile : AppCompatActivity() {
         }
 
         // Create object to store in database
-        val encrytedFile = FileEntity(
+        val infoFile = FileEntity(
             0, //0 correspond to 'no value', autogenerate handles it for us
             name,
-            encryptedKey.bytes.byteArray,
-            encryptedKey.initVector?.byteArray!!,
-            encryptedCheck.bytes.byteArray,
-            encryptedCheck.initVector?.byteArray!!,
-            path+".crypt",
-            encryptedContent.initVector?.byteArray!!
+            "$path.crypt"
         )
 
         // Store object in database
         val db = getDatabase(this)
-        db?.getFileDao()?.insertFile(encrytedFile)
+        db?.getFileDao()?.insertFile(infoFile)
 
         setResult(10)
         finish()

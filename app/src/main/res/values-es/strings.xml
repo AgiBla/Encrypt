@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Encrypt</string>
+    <string name="encrypt_file">ELEGIR ARCHIVO</string>
     <string name="decrypt_file">DESENCRIPTAR ARCHIVO</string>
     <string name="encrypt">ENCRIPTAR</string>
     <string name="decrypt">DESENCRIPTAR</string>
-    <string name="encrypt_file">ENCRIPTAR ARCHIVO</string>
+    <string name="settings">Ajustes</string>
     <string name="pin_code">Crea un código PIN</string>
     <string name="pin_code1">Inserta código PIN</string>
     <string name="selected_file">Has elegido el archivo:</string>

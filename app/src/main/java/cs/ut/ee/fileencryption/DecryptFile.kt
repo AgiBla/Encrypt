@@ -1,7 +1,6 @@
 package cs.ut.ee.fileencryption
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.rs3vans.krypto.*
@@ -18,45 +17,48 @@ import javax.crypto.spec.SecretKeySpec
 
 class DecryptFile : AppCompatActivity() {
 
-    var content = listOf<String>()
+    private var content = listOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.decryptfile)
 
-        var name = intent.getStringExtra("name")
+        val name = intent.getStringExtra("name")!!
+        var path = intent.getStringExtra("path") ?: ""
 
-        val db = LocalDbClient.getDatabase(this)
-        val file = db!!.getFileDao().findByName(name)
+        // File information is in database
+        if (path == "") {
+            val db = LocalDbClient.getDatabase(this)
+            val file = db!!.getFileDao().findByName(name)
+            path = file.contentByte
+
+            // Remove file entry from database
+            deleteButton.setOnClickListener {
+                db.getFileDao().deleteFile(file)
+                finish()
+            }
+        }
 
         // Try to read from file. If exception file doesn't exist
         try {
-            content = String(File(file.contentByte).readBytes(), Charsets.ISO_8859_1).split("#####")
+            content = String(File(path).readBytes(), Charsets.ISO_8859_1).split("#####")
             deleteButton.visibility = View.INVISIBLE
         } catch (e : Exception) {
             textError2.visibility = View.VISIBLE
             encryptButton.isEnabled = false
         }
 
-        val keyByte = Bytes(content[1].toByteArray(Charsets.ISO_8859_1))
-        val keyInit = Bytes(content[2].toByteArray(Charsets.ISO_8859_1))
-        val checkByte = Bytes(content[3].toByteArray(Charsets.ISO_8859_1))
-        val checkInit = Bytes(content[4].toByteArray(Charsets.ISO_8859_1))
-        val contentByte = Bytes(content[5].toByteArray(Charsets.ISO_8859_1))
-        val contentInit = Bytes(content[6].toByteArray(Charsets.ISO_8859_1))
-
         // Write name of the file in TextView
-        textFileName.text = content[0]
+        textFileName.text = name
 
-        encryptButton.setOnClickListener() {
+        encryptButton.setOnClickListener {
 
             val len = editText.text.toString().length
             // Inserted pin is at least 4 numbers
-            if (len >= 4) {
+            if (len in 4..16) {
 
                 // Create decryption key combining pin and salt
                 val key = editText.text.toString() + "0".repeat(16-len)
-                Log.i("patata", key)
 
                 // Create cipher with generated key and AES algorithm used for encryption
                 val cipher = BlockCipher(SecretKeySpec(key.toByteArray(), "AES"))
@@ -64,11 +66,17 @@ class DecryptFile : AppCompatActivity() {
                 try {
 
                     // Decrypt check. If equals name then pin is correct
-                    var check = cipher.decrypt(Encrypted(checkByte, checkInit))
+                    val checkByte = Bytes(content[3].toByteArray(Charsets.ISO_8859_1))
+                    val checkInit = Bytes(content[4].toByteArray(Charsets.ISO_8859_1))
 
-                    if (check.bytes.toDecodedString() == name){
+                    val check = cipher.decrypt(Encrypted(checkByte, checkInit))
+
+                    if (check.bytes.toDecodedString() == content[0] /*Name*/){
 
                         // Recover secret key and create new cipher
+                        val keyByte = Bytes(content[1].toByteArray(Charsets.ISO_8859_1))
+                        val keyInit = Bytes(content[2].toByteArray(Charsets.ISO_8859_1))
+
                         val decryptedKey = cipher.decrypt(Encrypted(keyByte, keyInit))
                         val secretCipher = BlockCipher(importAesKey(decryptedKey.bytes))
 
@@ -77,10 +85,13 @@ class DecryptFile : AppCompatActivity() {
                         textError.visibility = View.INVISIBLE
 
                         // Decrypt content
-                        var content = secretCipher.decrypt(Encrypted(contentByte, contentInit))
+                        val contentByte = Bytes(content[5].toByteArray(Charsets.ISO_8859_1))
+                        val contentInit = Bytes(content[6].toByteArray(Charsets.ISO_8859_1))
+
+                        val content = secretCipher.decrypt(Encrypted(contentByte, contentInit))
 
                         // Write new file
-                        var f = File(file.contentByte.replace(".crypt", ""))
+                        val f = File(path.replace(".crypt", ""))
                         f.writeBytes(content.bytes.byteArray)
 
                         finish()
@@ -95,12 +106,6 @@ class DecryptFile : AppCompatActivity() {
             } else {
                 textError.visibility = View.VISIBLE
             }
-        }
-
-        // Remove file entry from database
-        deleteButton.setOnClickListener() {
-            db.getFileDao().deleteFile(file)
-            finish()
         }
     }
 }

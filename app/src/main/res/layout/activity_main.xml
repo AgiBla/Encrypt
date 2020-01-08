@@ -26,7 +26,7 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/buttonshape"
 
-        android:onClick="EncryptFile"
+        android:onClick="encryptFile"
         android:text="@string/encrypt_file"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
@@ -41,7 +41,7 @@
 
         android:layout_marginTop="50dp"
         android:background="@drawable/buttonshape"
-        android:onClick="DecryptFile"
+        android:onClick="decryptFile"
 
         android:text="@string/decrypt_file"
         android:textColor="#FFFFFF"

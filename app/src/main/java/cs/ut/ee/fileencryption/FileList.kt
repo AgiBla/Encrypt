@@ -13,20 +13,22 @@ class FileList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.file_list)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+
 
         // Read file names from database
         val db = LocalDbClient.getDatabase(this)
         var listAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, db!!.getFileDao().loadFilenames())
         files_listview.adapter = listAdapter
 
-        files_listview.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+        files_listview.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             val name = listAdapter.getItem(position)!!
 
             // Create new activity to decrypt selected file
             val intent = Intent(this, DecryptFile()::class.java)
             intent.putExtra("name", name)
             startActivityForResult(intent, 1)
-        })
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

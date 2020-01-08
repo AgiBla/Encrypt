@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">Encrypt</string>
-    <string name="encrypt_file">ENCRYPT A FILE</string>
+    <string name="encrypt_file">SELECT A FILE</string>
     <string name="decrypt_file">DECRYPT A FILE</string>
     <string name="selected_file">You have selected the file:</string>
     <string name="pin_code">Create a PIN code</string>
     <string name="pin_code1">Insert PIN code</string>
     <string name="encrypt">ENCRYPT</string>
     <string name="decrypt">DECRYPT</string>
+    <string name="settings">Settings</string>
     <string name="characters">PIN should be at least 4 characters</string>
     <string name="pin_incorrect">PIN code is incorrect</string>
     <string name="unable">This file cannot be encrypted\nTry moving it to Downloads folder and try again</string>

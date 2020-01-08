@@ -1,12 +1,12 @@
 package cs.ut.ee.fileencryption
 
+import android.Manifest.*
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
 
-        if(ContextCompat.checkSelfPermission(this , android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-            val requestedPermissions: Array<String> = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        if(ContextCompat.checkSelfPermission(this , permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+            val requestedPermissions: Array<String> = arrayOf(permission.READ_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(this, requestedPermissions, 1)
         }
     }
@@ -36,31 +36,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
+        when (item.itemId) {
             R.id.action_settings -> startActivity(Intent(this, SettingsActivity()::class.java))
         }
         return true
     }
 
 
-    fun EncryptFile(view: View) {
-        OpenFileExplorer(10)
+    fun encryptFile(view: View) {
+        openFileExplorer(10)
     }
 
-    fun DecryptFile(view: View) {
+    fun decryptFile(view: View) {
 
         val intent = Intent(this, FileList::class.java)
         startActivity(intent)
     }
 
-    fun OpenFileExplorer(requestcode: Int){
+    fun openFileExplorer(requestCode: Int){
 
-        val toast = Toast.makeText(applicationContext, R.string.toast_1, Toast.LENGTH_LONG)
+        val toast = Toast.makeText(applicationContext, R.string.toast_1, Toast.LENGTH_SHORT)
         toast.show()
 
         val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.setType("*/*")
-        startActivityForResult(intent, requestcode)
+        intent.type = "*/*"
+        startActivityForResult(intent, requestCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -84,10 +84,10 @@ class MainActivity : AppCompatActivity() {
                 if (uri!!.scheme.toString().compareTo("content") == 0) {
                     val cursor: Cursor = contentResolver.query(uri, null, null, null, null)!!
                     if (cursor.moveToFirst()) {
-                        val column_index: Int =
+                        val columnIndex: Int =
                             cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA) //Instead of "MediaStore.Images.Media.DATA" can be used "_data"
                         val filePathUri =
-                            Uri.parse(cursor.getString(column_index))
+                            Uri.parse(cursor.getString(columnIndex))
                         name = filePathUri.lastPathSegment.toString()
                         path = filePathUri.path!!
 
@@ -102,16 +102,20 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(applicationContext, path, Toast.LENGTH_SHORT).show()
 
-            // Create new activity to encrypt selected file
-            val intent = Intent(this, EncryptFile()::class.java)
-            intent.putExtra("path", path)
-            intent.putExtra("name", name)
-            startActivityForResult(intent, 1)
-        }
+            // Decrypt file
+            if (path.endsWith(".crypt")) {
+                val intent = Intent(this, DecryptFile()::class.java)
+                intent.putExtra("path", path)
+                intent.putExtra("name", name.replace(".crypt", ""))
+                startActivityForResult(intent, 1)
 
-        // No file selected
-        else {
-            Toast.makeText(applicationContext, R.string.toast_3, Toast.LENGTH_SHORT).show()
+            // Encrypt file
+            } else {
+                val intent = Intent(this, EncryptFile()::class.java)
+                intent.putExtra("path", path)
+                intent.putExtra("name", name)
+                startActivityForResult(intent, 1)
+            }
         }
     }
 }
