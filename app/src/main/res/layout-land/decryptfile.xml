@@ -21,12 +21,14 @@
 
     <TextView
         android:id="@+id/textFileName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/textError2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text1" />
 
@@ -78,30 +80,30 @@
         android:layout_width="270dp"
         android:layout_height="60dp"
 
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/buttonshape"
         android:text="@string/decrypt"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textError" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="270dp"
         android:layout_height="60dp"
 
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/buttonshape_red"
         android:text="@string/delete_file"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textError"
         tools:visibility="invisible" />
 
     <TextView

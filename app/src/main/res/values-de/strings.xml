@@ -19,6 +19,5 @@
     <string name="toast_1">Wählen Sie die zu verschlüsselnde Datei aus</string>
     <string name="toast_2">Datei erfolgreich verschlüsselt</string>
     <string name="toast_3">Datei nicht ausgewählt</string>
-    <string name="toast_4">Verbindung zu Random.org nicht möglich</string>
     <string name="toast_5">Es existiert bereits eine Date mit diesem Namen</string>
 </resources>

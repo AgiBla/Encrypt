@@ -16,6 +16,10 @@ import android.view.Menu
 import android.view.MenuItem
 
 
+
+
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,16 +52,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun decryptFile(view: View) {
-
         val intent = Intent(this, FileList::class.java)
         startActivity(intent)
     }
 
     fun openFileExplorer(requestCode: Int){
-
-        val toast = Toast.makeText(applicationContext, R.string.toast_1, Toast.LENGTH_SHORT)
-        toast.show()
-
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "*/*"
         startActivityForResult(intent, requestCode)
@@ -100,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 name = fileName[fileName.size-1]
             }
 
-            Toast.makeText(applicationContext, path, Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, path, Toast.LENGTH_LONG).show()
 
             // Decrypt file
             if (path.endsWith(".crypt")) {

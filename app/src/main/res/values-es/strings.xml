@@ -20,6 +20,5 @@
     <string name="toast_1">Seleccione el archivo que desea encriptar</string>
     <string name="toast_2">Archivo encriptado con éxito</string>
     <string name="toast_3">Archivo no seleccionado</string>
-    <string name="toast_4">No se pudo conectar con Random.org</string>
     <string name="toast_5">Ya existe un archivo con ese nombre</string>
 </resources>

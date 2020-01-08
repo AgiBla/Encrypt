@@ -19,7 +19,6 @@
     <string name="toast_1">Select file you want to encrypt</string>
     <string name="toast_2">File encrypted successfully</string>
     <string name="toast_3">File not selected</string>
-    <string name="toast_4">Unable to connect to Random.org</string>
     <string name="toast_5">There already exists a file with that name</string>
 
 </resources>
