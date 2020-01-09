@@ -1,4 +1,4 @@
-# FileEncryption
+# Encrypt
 
 As the amount of data in the world has increased exponentially,
 data security and protection emerged to be one of the most important
@@ -7,7 +7,7 @@ invoices etc. are often sent to a person via mail or can be accessed
 using mobile applications. Then this highly sensitive data is stored
 unencrypted somewhere on the phones storage.
  
-Hence we present **Encytp** - An android application designed to
+Hence we present **Encypt** - An android application designed to
 encrypt data on your android smartphone, safely storing it in a local
 file and preventing unauthorized access to your sensitive files.
 
@@ -31,19 +31,18 @@ this application uses a local database to store and read the list of encrypted f
 so the user is able of quickly locating previously encrypted files.
 
 
-- The application enables three different languages using Android resource
+- The application enables three different languages (English, Spanish and German) using Android resource
  localization & orientation localization as well as providing different 
  UI layouts for landscape and portrait modes for all views.
  
  
-- FileEncryption uses the [krypto](https://github.com/rs3vans/krypto) API. A strong, two way 
+- The application uses the [krypto](https://github.com/rs3vans/krypto) API. A strong, two way 
     encryption wrapper library around the Java Cryptography Architecture 
     (JCA) API, making it easier to use from Kotlin
     
     
 ## Disclaimer
 
-Cryptography is a complex and often difficult-to-understand subject. 
 The author(s) of Encrypt make no claim of expert knowledge in cryptography and we 
 are not responsible for any loss or leakage of data, sensitive or otherwise.
 
